@@ -80,7 +80,7 @@ def updateDateIndex(map, accident):
     accidentdate = datetime.datetime.strptime(occurreddate, '%Y-%m-%d %H:%M:%S')
     entry = om.get(map, accidentdate.date())
     if entry is None:
-        datentry = newDataEntry(accident)
+        datentry = newDataEntry()
         om.put(map, accidentdate.date(), datentry)
     else:
         datentry = me.getValue(entry)
@@ -100,7 +100,7 @@ def addDateIndex(datentry, accident):
     severityIndex = datentry['severityIndex']
     seventry = m.get(severityIndex, accident['Severity'])
     if (seventry is None):
-        entry = newSeverityEntry(accident['Severity'], accident)
+        entry = newSeverityEntry(accident['Severity'])
         lt.addLast(entry['lstseverity'], accident)
         m.put(severityIndex, accident['Severity'], entry)
     else:
@@ -114,19 +114,19 @@ def newDataEntry(accident):
     Crea una entrada en el indice por fechas, es decir en el arbol
     binario.
     """
-    entry = {'severityIndex': None, 'lstSeverity': None}
+    entry = {'severityIndex': None, 'lstseverity': None}
     entry['severityIndex'] = m.newMap(numelements=30,
                                      maptype='PROBING',
                                      comparefunction=compareSeverity)
-    entry['lstAccidents'] = lt.newList('SINGLE_LINKED', compareDates)
+    entry['lstaccidents'] = lt.newList('SINGLE_LINKED', compareDates)
     return entry
 
-def newSeverityEntry(severitygrp, crime):
+def newSeverityEntry(severitygrp):
     """
     Crea una entrada en el indice por tipo de crimen, es decir en
     la tabla de hash, que se encuentra en cada nodo del arbol.
     """
-    seventry = {'severity': None, 'lstSeverity': None}
+    seventry = {'severity': None, 'lstseverity': None}
     seventry['severity'] = severitygrp
     seventry['lstoffenses'] = lt.newList('SINGLELINKED', compareSeverity)
     return seventry
@@ -179,7 +179,7 @@ def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
     """
     accidentdate = om.get(analyzer['dateIndex'], initialDate)
     if accidentdate['key'] is not None:
-        accidentmap = me.getValue(accidentdate)['accidentIndex']
+        accidentmap = me.getValue(accidentdate)['severityIndex']
         numseverity = m.get(accidentmap, severity)
         if numseverity is not None:
             return m.size(me.getValue(numseverity)['lstaccidents'])
