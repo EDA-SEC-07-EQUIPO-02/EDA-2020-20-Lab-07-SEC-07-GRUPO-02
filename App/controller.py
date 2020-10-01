@@ -42,8 +42,9 @@ def init():
     """
     Llama la funcion de inicializacion del modelo.
     """
-
-    return None
+    
+    analyzer = model.newAnalyzer()
+    return analyzer
 
 
 # ___________________________________________________
@@ -55,9 +56,39 @@ def loadData(analyzer, accidentsfile):
     """
     Carga los datos de los archivos CSV en el modelo
     """
-    
+    accidentsfile = cf.data_dir + accidentsfile
+    input_file = csv.DictReader(open(accidentsfile, encoding="utf-8"), delimeter =",")
+
+    for accident in input_file:
+        model.addAccident(analyzer, accident)    
     return analyzer
 
 # ___________________________________________________
 #  Funciones para consultas
 # ___________________________________________________
+
+def accidentsSize(analyzer):
+    return model.accidentsSize(analyzer)
+
+def indexHeight(analyzer):
+    return model.indexHeight(analyzer)
+
+def indexSize(analyzer):
+    return model.indexSize(analyzer)
+
+def minKey(analyzer):
+    return model.indexSize(analyzer)
+
+def maxKey(analyzer):
+    return model.maxKey(analyzer)
+
+def getAccidentsByRange(analyzer, initialDate, finalDate):
+
+    initialDate = datetime.datetime.strptime(initialDate, "%Y-%m-%d")
+    finalDate = datetime.datetime.strptime(finalDate, "%Y-%m-%d")
+    return model.getAccidentsByRange(analyzer, initialDate.date(), finalDate.date())
+
+def getAccidentsByRangeCode(analyzer, initialDate, offensecode):
+
+    initialDate = datetime.datetime.strptime(initialDate, "%Y-%m-%d")
+    return model.getAccidentsByRangeCode(analyzer, initialDate.date(), offensecode)
