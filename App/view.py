@@ -51,7 +51,7 @@ def printMenu():
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de accidentes")
-    print("3- Requerimento 1")
+    print("3- Conocer accidentes en una fecha")
     print("4- Requerimento 2")
     print("0- Salir")
     print("*******************************************")
@@ -79,7 +79,12 @@ while True:
         print("Mayor llave: " + str(controller.maxKey(cont)))
 
     elif int(inputs[0]) == 3:
-        print("\nBuscando crimenes en un rango de fechas: ")
+        print("\nBuscando accidentes en un rango de fechas: ")
+        initialDate = input("Fecha (YYYY-MM-DD): ")
+        severity = input("Severidad: ")
+        numAccidents = controller.getAccidentsByRangeSeverity(cont, initialDate, severity)
+
+        print("\nTotal de accidentes con severidad: "+ severity + " en esa fecha: " + str(numAccidents))
 
 
     elif int(inputs[0]) == 4:

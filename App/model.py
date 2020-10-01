@@ -165,14 +165,14 @@ def maxKey(analyzer):
     """
     return om.maxKey(analyzer['dateIndex'])
 
-def getaccidentsByDateRange(analyzer, initialDate, finalDate):
+def getAccidentsByDateRange(analyzer, initialDate, finalDate):
     """
     Retorna el numero de accidentes en un rago de fechas.
     """
     lst = om.values(analyzer['dateIndex'], initialDate, finalDate)
     return lst
 
-def getCrimesByRangeCode(analyzer, initialDate, severity):
+def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
     """
     Para una fecha determinada, retorna el numero de accidentes
     de una severidad especifica.

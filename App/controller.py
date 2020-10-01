@@ -88,7 +88,7 @@ def getAccidentsByRange(analyzer, initialDate, finalDate):
     finalDate = datetime.datetime.strptime(finalDate, "%Y-%m-%d")
     return model.getAccidentsByRange(analyzer, initialDate.date(), finalDate.date())
 
-def getAccidentsByRangeSeverity(analyzer, initialDate, accidentID):
+def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
 
     initialDate = datetime.datetime.strptime(initialDate, "%Y-%m-%d")
-    return model.getAccidentsByRangeSeverity(analyzer, initialDate.date(), accidentID)
+    return model.getAccidentsByRangeSeverity(analyzer, initialDate.date(), severity)
