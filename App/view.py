@@ -38,7 +38,7 @@ operación seleccionada.
 # ___________________________________________________
 
 
-accidentsfile = us_accidents_small.csv
+accidentsfile = "us_accidents_small.csv"
 
 # ___________________________________________________
 #  Menu principal
