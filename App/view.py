@@ -39,6 +39,7 @@ operación seleccionada.
 
 
 accidentsfile = "us_accidents_small.csv"
+cont = None
 
 # ___________________________________________________
 #  Menu principal

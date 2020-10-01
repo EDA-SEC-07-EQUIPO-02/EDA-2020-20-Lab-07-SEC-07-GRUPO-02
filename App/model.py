@@ -80,7 +80,7 @@ def updateDateIndex(map, accident):
     accidentdate = datetime.datetime.strptime(occurreddate, '%Y-%m-%d %H:%M:%S')
     entry = om.get(map, accidentdate.date())
     if entry is None:
-        datentry = newDataEntry()
+        datentry = newDataEntry(accident)
         om.put(map, accidentdate.date(), datentry)
     else:
         datentry = me.getValue(entry)
@@ -128,7 +128,7 @@ def newSeverityEntry(severitygrp):
     """
     seventry = {'severity': None, 'lstseverity': None}
     seventry['severity'] = severitygrp
-    seventry['lstoffenses'] = lt.newList('SINGLELINKED', compareSeverity)
+    seventry['lstseverity'] = lt.newList('SINGLELINKED', compareSeverity)
     return seventry
 
 
