@@ -47,7 +47,7 @@ def newAnalyzer():
 
     Retorna el analizador inicializado.
     """
-    analyzer = {'crimes': None,
+    analyzer = {'accidents': None,
                 'dateIndex': None
                 }
 
