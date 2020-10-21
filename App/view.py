@@ -38,7 +38,7 @@ operación seleccionada.
 # ___________________________________________________
 
 
-accidentsfile = "us_accidents_small.csv"
+accidentsfile = "us_accidents_dis_2016.csv"
 cont = None
 
 # ___________________________________________________
