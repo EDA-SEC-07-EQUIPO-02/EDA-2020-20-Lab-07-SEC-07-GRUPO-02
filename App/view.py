@@ -54,6 +54,7 @@ def printMenu():
     print("2- Cargar información de accidentes")
     print("3- Conocer accidentes en una fecha")
     print("4- Requerimento 2")
+    print("6- Conocer el estado con más accidentes en una fecha")
     print("0- Salir")
     print("*******************************************")
 
@@ -90,6 +91,11 @@ while True:
 
     elif int(inputs[0]) == 4:
         print("\nRequerimiento No 1 del reto 3: ")
+
+    elif int(inputs[0]) == 6:
+        initialDate = input("Fecha inicial (YYYY-MM-DD): ")
+        finalDate = input("Fecha final (YYYY-MM-DD): ")
+        print("")
 
     else:
         sys.exit(0)
