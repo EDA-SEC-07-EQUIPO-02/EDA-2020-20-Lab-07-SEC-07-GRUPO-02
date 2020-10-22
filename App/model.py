@@ -185,6 +185,13 @@ def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
             return m.size(me.getValue(numseverity)['lstaccidents'])
         return 0
 
+def getStateWithMostAccidents(analyzer, initialDate, finalDate):
+    """
+    Retorna el estado con más accidentes.
+    """
+
+
+
 
 # ==============================
 # Funciones de Comparacion
