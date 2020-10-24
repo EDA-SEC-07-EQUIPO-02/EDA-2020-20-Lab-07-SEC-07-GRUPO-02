@@ -21,6 +21,7 @@
  """
 import config
 from DISClib.ADT import list as lt
+from DISClib.DataStructures import listiterator as it
 from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
 from DISClib.ADT import map as m
@@ -185,10 +186,43 @@ def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
             return m.size(me.getValue(numseverity)['lstaccidents'])
         return 0
 
+<<<<<<< HEAD
 def getStateWithMostAccidents(analyzer, initialDate, finalDate):
     """
     Retorna el estado con más accidentes.
     """
+=======
+def getAccidentsBeforeDate(analyzer, finalDate):
+    arbol = analyzer["dateIndex"] 
+    minDate= om.minKey(arbol)
+    accidentes= om.values(arbol,minDate,finalDate)
+    return accidentes
+
+def getAccidentsByHour(analyzer, initialHour, finalHour):
+    horas=om.values(analyzer["hourIndex"], initialHour, finalHour)
+    iterator= it.newIterator(horas)
+    s1=0
+    s2=0
+    s3=0
+    s4=0
+    suma=0
+    while it.hasNext(iterator):
+        hora=it.hasNext(iterator)
+        for severidad in range (1, 5):
+            severi= m.get(hora["severityindex"], severidad)
+            if severi != None:
+                severity = me.getvalue(severi)
+                size= lt.size(severity['lstseverities'])
+                if severidad==1:
+                   s1+= size
+                elif severidad ==2:
+                    s2+= size
+                elif severidad ==3:
+                    s3+=size
+                elif severidad ==4:
+                    s4+=size
+    return suma, s1,s2,s3,s4                     
+>>>>>>> bb9a97450eb4b179c6fe4195982cc4006ef93fea
 
 
 

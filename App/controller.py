@@ -92,3 +92,11 @@ def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
 
     initialDate = datetime.datetime.strptime(initialDate, "%Y-%m-%d")
     return model.getAccidentsByRangeSeverity(analyzer, initialDate.date(), severity)
+
+def getAccidentsBeforeDate(analyzer, finalDate):
+
+    finalDate = datetime.datetime.strptime(finalDate, "%Y-%m-%d")
+    return model.getAccidentsBeforeDate(analyzer, finalDate.date())
+
+def getAccidentsByHour(analyzer, initialHour, finalHour):
+    return model.getAccidentByHour(analyzer, initialHour, finalHour)
