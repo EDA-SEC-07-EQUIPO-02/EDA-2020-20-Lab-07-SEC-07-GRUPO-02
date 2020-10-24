@@ -38,8 +38,47 @@ operación seleccionada.
 # ___________________________________________________
 
 
-accidentsfile = "us_accidents_dis_2016.csv"
+accidentsfile = "us_accidents_small.csv"
 cont = None
+
+# ___________________________________________________
+#  funciones extra
+# ___________________________________________________
+
+def printMoreAccidentsOnDate(accidents):
+    total=0
+    dates=[]
+    moreReportedDate:""
+    for accidentes in range(1, lt.size(accidents)):
+        keyDate = lt.getElement(accidents,accidentes)
+        tota=lt.size(keyDate["AccidentList"])
+        dates.append(tota)
+        total+=tota
+    moreCommonDate=max(dates)
+    for accidentes in range(1, lt.size(accidents)):
+        keyDate=lt.getElement(accidents,accidentes)
+        moreCommon= lt.size(keyDate["AccidentList"])
+        if moreCommonDate==moreCommon:
+            moreReportedDate==keyDate["Date"]
+    print("Total de accidentes antes de la fecha: " + total + "y la fecha con mas accidentes fue : " + moreReportedDate )        
+
+def printAccidentsByHour(analyzer, initialHour, finalHour):
+    accidents=controller.getAccidentsByHour(analyzer, initialHour, finalHour)
+    s1= accidents[1]
+    s2= accidents[2]
+    s3= accidents[3]
+    s4= accidents[4]
+    suma=accidents[0]
+    print("Accidentes en el rango de horas: " + suma )
+    print("Accidentes de severidad 1: "+ s1)
+    print("Accidentes de severidad 1: "+ s2)
+    print("Accidentes de severidad 1: "+ s3)
+    print("Accidentes de severidad 1: "+ s4)
+    print("porcentaje de severidad 1 comparado con el total de casos; "+ round((s1/suma)*100))
+    print("porcentaje de severidad 2 comparado con el total de casos; "+ round((s2/suma)*100))
+    print("porcentaje de severidad 3 comparado con el total de casos; "+ round((s3/suma)*100))
+    print("porcentaje de severidad 4 comparado con el total de casos; "+ round((s4/suma)*100))
+
 
 # ___________________________________________________
 #  Menu principal
@@ -52,8 +91,9 @@ def printMenu():
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de accidentes")
-    print("3- Conocer accidentes en una fecha")
-    print("4- Requerimento 2")
+    print("3- Requerimiento 3: Conocer accidentes en una fecha")
+    print("4- Requerimento 2: Conocer los accidentes anteriores a una fecha")
+    print("5- Requqerimiento 5(grupal): Conocer los accidentes por rangos de hora")
     print("0- Salir")
     print("*******************************************")
 
@@ -89,7 +129,19 @@ while True:
 
 
     elif int(inputs[0]) == 4:
-        print("\nRequerimiento No 1 del reto 3: ")
+        print("\nRequerimiento No 2 del reto 3: ")
+        fecha = input("Introduzca fecha en formato YYYY-MM-DD: ")
+        accidents= controller.getAccidentsBeforeDate(cont, fecha)
+        if accidents != None:
+           printMoreAccidentsOnDate(accidents)
+        if accidents == None:
+            print("No se encontraron accidentes antes de la fecha dada")
+    
+    elif int(inputs[0])== 5:
+        print("\nRequerimiento No 5 del reto 3: ")
+        initialHour: input("introduzca la hora inicial: ")
+        finalHour: input("introduzc la hora final: ")
+        printAccidentsByHour(cont,initialHour,finalHour)
 
     else:
         sys.exit(0)
