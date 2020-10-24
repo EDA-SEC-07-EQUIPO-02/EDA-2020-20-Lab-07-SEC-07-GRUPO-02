@@ -100,3 +100,11 @@ def getAccidentsBeforeDate(analyzer, finalDate):
 
 def getAccidentsByHour(analyzer, initialHour, finalHour):
     return model.getAccidentByHour(analyzer, initialHour, finalHour)
+
+def getStateWithMostAccidents(analyzer, initialDate, finalDate):
+    
+    return model.getStateWithMostAccidents(analyzer, initialDate, finalDate)
+
+def getAccidentsByCoordinates(analyzer, latitude, longitude, radius):
+
+    return model.getAccidentsByCoordinates(analyzer, latitude, longitude, radius)

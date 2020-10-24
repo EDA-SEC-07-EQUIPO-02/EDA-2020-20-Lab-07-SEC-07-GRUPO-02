@@ -91,9 +91,10 @@ def printMenu():
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de accidentes")
-    print("3- Requerimiento 3: Conocer accidentes en una fecha")
-    print("4- Requerimento 2: Conocer los accidentes anteriores a una fecha")
-    print("5- Requqerimiento 5(grupal): Conocer los accidentes por rangos de hora")
+    print("3- Requerimento 2: Conocer los accidentes anteriores a una fecha")
+    print("4- Requerimiento 3: Conocer accidentes en una fecha")
+    print("6- Requqerimiento 5(grupal): Conocer los accidentes por rangos de hora")
+    print("7- Requerimiento 6(bono): Conocer la zona geográfica más accidentada")
     print("0- Salir")
     print("*******************************************")
 
@@ -118,17 +119,8 @@ while True:
         print("Elementos en el árbol: " + str(controller.indexSize(cont)))
         print("Menor llave: " + str(controller.minKey(cont)))
         print("Mayor llave: " + str(controller.maxKey(cont)))
-
+    
     elif int(inputs[0]) == 3:
-        print("\nBuscando accidentes en un rango de fechas: ")
-        initialDate = input("Fecha (YYYY-MM-DD): ")
-        severity = input("Severidad: ")
-        numAccidents = controller.getAccidentsByRangeSeverity(cont, initialDate, severity)
-
-        print("\nTotal de accidentes con severidad: "+ severity + " en esa fecha: " + str(numAccidents))
-
-
-    elif int(inputs[0]) == 4:
         print("\nRequerimiento No 2 del reto 3: ")
         fecha = input("Introduzca fecha en formato YYYY-MM-DD: ")
         accidents= controller.getAccidentsBeforeDate(cont, fecha)
@@ -136,17 +128,36 @@ while True:
            printMoreAccidentsOnDate(accidents)
         if accidents == None:
             print("No se encontraron accidentes antes de la fecha dada")
-    
-    elif int(inputs[0])== 5:
-        print("\nRequerimiento No 5 del reto 3: ")
-        initialHour: input("introduzca la hora inicial: ")
-        finalHour: input("introduzc la hora final: ")
-        printAccidentsByHour(cont,initialHour,finalHour)
 
-    elif int(inputs[0]) == 6:
+    elif int(inputs[0]) == 4:
+        print("\nRequerimiento No 3 del reto 3: ")
+        print("\nBuscando accidentes en un rango de fechas: ")
+        initialDate = input("Fecha (YYYY-MM-DD): ")
+        severity = input("Severidad: ")
+        numAccidents = controller.getAccidentsByRangeSeverity(cont, initialDate, severity)
+
+        print("\nTotal de accidentes con severidad: "+ severity + " en esa fecha: " + str(numAccidents))
+    
+    elif int(inputs[0]) == 5:
+        print("\nRequerimiento No 4 del reto 3: ")
         initialDate = input("Fecha inicial (YYYY-MM-DD): ")
         finalDate = input("Fecha final (YYYY-MM-DD): ")
+        state = controller.getStateWithMostAccidents(cont, initialDate, severity)
         print("")
+
+    
+    elif int(inputs[0])== 6:
+        print("\nRequerimiento No 5 del reto 3: ")
+        initialHour = input("introduzca la hora inicial: ")
+        finalHour = input("introduzc la hora final: ")
+        printAccidentsByHour(cont,initialHour,finalHour)
+    
+    elif int(inputs[0]) == 7:
+        print("\nRequerimiento No 6 del reto 3: ")
+        latitude = input("Introduzca la latidud: ")
+        longitude = input("Introduza la longitud: ")
+        radius = input("Introduzca el radio: ")
+        accidents = 
 
     else:
         sys.exit(0)

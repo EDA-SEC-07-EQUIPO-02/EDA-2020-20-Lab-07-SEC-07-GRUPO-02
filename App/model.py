@@ -49,12 +49,20 @@ def newAnalyzer():
     Retorna el analizador inicializado.
     """
     analyzer = {'accidents': None,
-                'dateIndex': None
+                'dateIndex': None,
+                'hourIndex': None,
+                'state': None,
+                'latitud': None,
+                'longitud': None,
                 }
 
     analyzer['accidents'] = lt.newList('SINGLE_LINKED', compareIds)
     analyzer['dateIndex'] = om.newMap(omaptype='RBT',
                                       comparefunction=compareDates)
+    analyzer["hourIndex"] = om.newMap(omaptype='RBT', comparefunction=compareHours)
+    analyzer["state"] = lt.newList('SINGLE_LINKED', compareStates)
+    analyzer["latitud"] = om.newMap(omaptype='RBT', comparefunction=)
+    analyzer["longitud"] = om.newMap(omaptype='RBT', comparefunction=)
     return analyzer
 
 # Funciones para agregar informacion al catalogo
@@ -186,12 +194,6 @@ def getAccidentsByRangeSeverity(analyzer, initialDate, severity):
             return m.size(me.getValue(numseverity)['lstaccidents'])
         return 0
 
-<<<<<<< HEAD
-def getStateWithMostAccidents(analyzer, initialDate, finalDate):
-    """
-    Retorna el estado con más accidentes.
-    """
-=======
 def getAccidentsBeforeDate(analyzer, finalDate):
     arbol = analyzer["dateIndex"] 
     minDate= om.minKey(arbol)
@@ -221,8 +223,20 @@ def getAccidentsByHour(analyzer, initialHour, finalHour):
                     s3+=size
                 elif severidad ==4:
                     s4+=size
-    return suma, s1,s2,s3,s4                     
->>>>>>> bb9a97450eb4b179c6fe4195982cc4006ef93fea
+    return suma, s1,s2,s3,s4                    
+
+def getStateWithMostAccidents(analyzer, initialDate, finalDate):
+    """
+    Retorna el estado con más accidentes.
+    """
+    lst = om.values(analyzer['dateIndex'], initialDate, finalDate)
+    state = 
+
+def getAccidentsByCoordinates(analyzer, latitude, longitude, radius):
+    """
+    Retorna los accidentes en el radio de una determinada zona geografica.
+    """
+
 
 
 
@@ -263,6 +277,50 @@ def compareSeverity(severity1, severity2):
     if (severity1 == severity):
         return 0
     elif (severity1 > severity):
+        return 1
+    else:
+        return -1
+
+def compareHours(hour1, hour2):
+    """
+    Compara la hora de dos accidentes
+    """
+    if (hour1 == hour2):
+        return 0
+    elif (hour1 > hour2):
+        return 1
+    else:
+        return -1
+
+def compareStates(state1, state2):
+    """
+    Compara los estados en donde ocurrieron dos accidentes
+    """
+    if (state1 == state2):
+        return 0
+    elif (state1 > state2):
+        return 1
+    else:
+        return -1
+
+def compareLatitudes(latitude1, latitude2):
+    """
+    Compara los estados en donde ocurrieron dos accidentes
+    """
+    if (latitude1 == latitude2):
+        return 0
+    elif (latitude1 > latitude2):
+        return 1
+    else:
+        return -1
+
+def compareLongitudes(longitude1, longitude2):
+    """
+    Compara los estados en donde ocurrieron dos accidentes
+    """
+    if (longitude1 == longitude2):
+        return 0
+    elif (longitude1 > longitude2):
         return 1
     else:
         return -1
